@@ -5,8 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SQLviewer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="531" Width="896">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19.002"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="File" Height="auto" Width="50">
+                <MenuItem Header="Export results"/>
+            </MenuItem>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23.002"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Menu Grid.Row="0" Background="#FFF3F3F3" BorderBrush="#FF7F899C" BorderThickness="0,1,1,0">
+                <MenuItem Header="Add" Height="22"/>
+                <MenuItem Header="Remove" Height="22"/>
+                <MenuItem Header="Edit" Height="22"/>
+            </Menu>
+            <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,1,0" VerticalScrollBarVisibility="Auto">
+                <TreeView >
+                    <TreeViewItem Header="Serwer szkoly: zst.xd.pl:3001" IsExpanded="True">
+                        <TreeViewItem Header="TreeViewItem" IsExpanded="True">
+                            <TreeViewItem Header="TreeViewItem"/>
+                        </TreeViewItem>
+                    </TreeViewItem>
+                </TreeView>
+            </ScrollViewer>
 
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="29*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StatusBar Grid.Row="1" BorderBrush="#FF828790" BorderThickness="0,0,1,1"/>
+            <RichTextBox BorderBrush="#FF828790" BorderThickness="0,1,1,1">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text="RichTextBox"/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Grid>
     </Grid>
 </Window>
