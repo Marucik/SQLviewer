@@ -24,5 +24,11 @@ namespace SQLviewer
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Window1 wnd = new Window1();
+            wnd.Show();
+        }
     }
 }

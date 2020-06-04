@@ -26,7 +26,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Menu Grid.Row="0" Background="#FFF3F3F3" BorderBrush="#FF7F899C" BorderThickness="0,1,1,0">
-                <MenuItem Header="Add" Height="22"/>
+                <MenuItem Header="Add" Height="22" Click="MenuItem_Click"/>
                 <MenuItem Header="Remove" Height="22"/>
                 <MenuItem Header="Edit" Height="22"/>
             </Menu>
