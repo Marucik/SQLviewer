@@ -31,5 +31,6 @@ namespace SQLviewer
         public string Server_address { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public string Port { get; set; }
     }
 }

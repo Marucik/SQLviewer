@@ -15,8 +15,6 @@ namespace SQLviewer
 {
     public partial class AddDatabaseWindow : Window
     {
-        private string hash;
-
         public AddDatabaseWindow()
         {
             InitializeComponent();        
@@ -25,12 +23,14 @@ namespace SQLviewer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string pass_hash = Password_hash.Encrypt(password.Password);
+            string pass_hash = PasswordHash.Encrypt(Password.Password);
+
             var db = new Database
             {
-                Server_address = server_name.Text,
-                Login = login.Text,
-                Password = pass_hash
+                Server_address = Server_address.Text,
+                Login = Login.Text,
+                Password = pass_hash,
+                Port = Port.Text
             };
 
             using (var context = new DatabasesContext())
