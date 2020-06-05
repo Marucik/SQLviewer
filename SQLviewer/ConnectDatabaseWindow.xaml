@@ -14,14 +14,14 @@
         </Grid.RowDefinitions>
         <Grid Height="127" VerticalAlignment="Center" HorizontalAlignment="Center" Width="321" Grid.Row="0">
             <Label Padding="0" Content="Server address:" HorizontalAlignment="Left" Margin="28,7,0,0" VerticalAlignment="Top" Width="170"/>
-            <TextBox Name="ServerAddress" HorizontalAlignment="Left" Margin="28,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+            <TextBox Name="ServerAddress" HorizontalAlignment="Left" Margin="28,28,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="197"/>
             <Label Padding="0" Content="Login:" HorizontalAlignment="Left" Margin="28,48,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="0.595,1.945"/>
-            <TextBox Name="Login" HorizontalAlignment="Left" Margin="28,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox Name="Login" HorizontalAlignment="Left" Margin="28,66,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120"/>
             <Label Padding="0" Content="Password:" HorizontalAlignment="Left" Margin="172,48,0,0" VerticalAlignment="Top"/>
             <PasswordBox Name="Password" HorizontalAlignment="Left" PasswordChar="*" VerticalAlignment="Top" Width="120" Margin="172,66,0,0"/>
             <Button Name="ConnectOnce" Content="Connect" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="76" Click="Button_Click" Margin="0,97,0,0"/>
             <Label Padding="0" Content="Port:" HorizontalAlignment="Left" Margin="254,10,0,0" VerticalAlignment="Top" Height="15" RenderTransformOrigin="0.5,0.5" Width="39" />
-            <TextBox Name="Port" HorizontalAlignment="Left" Margin="254,28,0,0" Text="1433" TextWrapping="Wrap" VerticalAlignment="Top" Width="38" Height="18"/>
+            <TextBox Name="Port" HorizontalAlignment="Left" Margin="254,28,0,0" Text="1433" TextWrapping="NoWrap" VerticalAlignment="Top" Width="38" Height="18"/>
 
         </Grid>
         <Grid Grid.Row="1">

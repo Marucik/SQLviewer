@@ -41,28 +41,44 @@ namespace SQLviewer
                 connectionString = ConnectDatabaseWindow.ConnectionString;
             }
 
-            string masterConnection = connectionString.Replace("%%%", "master");
-
-            using var connection = new SqlConnection(masterConnection);
-            connection.Open();
-
-            var command = new SqlCommand("SELECT name FROM sys.databases WHERE database_id != 1;", connection);
-            var reader = command.ExecuteReader();
-
-            List<string> DBnames = new List<string>();
-
-            while (reader.Read())
+            if (connectionString == null)
             {
-                string databaseName = reader.GetString(0);
-
-                DBnames.Add(databaseName);
+                MessageBox.Show("You didn't selected database");
             }
+            else
+            {
+                string masterConnection = connectionString.Replace("%%%", "master");
 
-            DatabasesBox.IsEnabled = true;
-            DatabasesBox.ItemsSource = DBnames;
-            DatabasesBox.SelectedIndex = 0;
+                using var connection = new SqlConnection(masterConnection);
 
-            connection.Close();
+                try
+                {
+                connection.Open();
+                }
+                catch (SqlException)
+                {
+                    MessageBox.Show("Cannot connect to database");
+                    return;
+                }
+
+                var command = new SqlCommand("SELECT name FROM sys.databases WHERE database_id != 1;", connection);
+                var reader = command.ExecuteReader();
+
+                List<string> DBnames = new List<string>();
+
+                while (reader.Read())
+                {
+                    string databaseName = reader.GetString(0);
+
+                    DBnames.Add(databaseName);
+                }
+
+                DatabasesBox.IsEnabled = true;
+                DatabasesBox.ItemsSource = DBnames;
+                DatabasesBox.SelectedIndex = 0;
+
+                connection.Close();
+            }
 
             e.Handled = true;
         }

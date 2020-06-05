@@ -42,7 +42,7 @@ namespace SQLviewer
 
             if (button.Name == "ConnectOnce")
             {
-                ConnectionString = $"Server=tcp:{ServerAddress.Text},{Port.Text};Initial Catalog=%%%;User ID={Login.Text};Password={Password.Password};Connection Timeout=60";
+                ConnectionString = $"Server=tcp:{ServerAddress.Text},{Port.Text};Initial Catalog=%%%;User ID={Login.Text};Password={Password.Password};Connection Timeout=15";
             } 
             else
             {
@@ -53,7 +53,7 @@ namespace SQLviewer
                                             .Select(q => new { q.Server_address, q.Login, q.Password, q.Port })
                                             .FirstOrDefault();
                     string decrypt_pass = PasswordHash.Decrypt(connectionParams.Password);
-                    ConnectionString = $"Server=tcp:{connectionParams.Server_address},{connectionParams.Port};Initial Catalog=%%%;User ID={connectionParams.Login};Password={decrypt_pass};Connection Timeout=60";
+                    ConnectionString = $"Server=tcp:{connectionParams.Server_address},{connectionParams.Port};Initial Catalog=%%%;User ID={connectionParams.Login};Password={decrypt_pass};Connection Timeout=15";
                 }
             }
 
