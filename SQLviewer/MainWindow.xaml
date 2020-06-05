@@ -12,43 +12,47 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="215*"/>
+            <ColumnDefinition Width="681*"/>
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="2">
-            <MenuItem Header="File" Height="auto" Width="50">
+            <MenuItem Header="File" Height="auto" Width="auto">
                 <MenuItem Header="Export results"/>
             </MenuItem>
+            <MenuItem Header="Server" Height="auto" Width="auto">
+                <MenuItem Header="Connect" Click="MenuItem_Click_1"/>
+                <Separator />
+                <MenuItem Header="Add" Click="MenuItem_Click"/>
+                <MenuItem Header="Edit"/>
+                <MenuItem Header="Remove"/>
+            </MenuItem>
         </Menu>
-        <Grid Grid.Row="1">
+        <Grid Margin="0,19,0,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="23.002"/>
+                <RowDefinition Height="102"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Menu Grid.Row="0" Background="#FFF3F3F3" BorderBrush="#FF7F899C" BorderThickness="0,1,1,0">
-                <MenuItem Header="Add" Height="22" Click="MenuItem_Click"/>
-                <MenuItem Header="Remove" Height="22"/>
-                <MenuItem Header="Edit" Height="22"/>
-            </Menu>
-            <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,1,0" VerticalScrollBarVisibility="Auto">
-                <TreeView >
-                    <TreeViewItem Header="Serwer szkoly: zst.xd.pl:3001" IsExpanded="True">
-                        <TreeViewItem Header="TreeViewItem" IsExpanded="True">
-                            <TreeViewItem Header="TreeViewItem"/>
-                        </TreeViewItem>
-                    </TreeViewItem>
-                </TreeView>
+            <StackPanel Grid.Row="0">
+                <Label Content="Database" Padding="0" Margin="5,5,5,0"/>
+                <ComboBox Name="DatabasesBox" Text="Select db" HorizontalAlignment="Stretch" Margin="5,0,5,0" IsEnabled="False" SelectionChanged="DatabasesBox_SelectionChanged" />
+                <Label Content="Table" Padding="0" Margin="5,5,5,0"/>
+                <ComboBox Name="TablesBox" HorizontalAlignment="Stretch" Margin="5,0,5,0" IsEnabled="False" SelectionChanged="TablesBox_SelectionChanged" />
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,10,1,0" VerticalScrollBarVisibility="Auto">
+                <ListView BorderThickness="0,1,0,0" BorderBrush="#FF828790">
+
+                </ListView>
             </ScrollViewer>
 
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Column="1" Margin="0,19,0,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="29*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <StatusBar Grid.Row="1" BorderBrush="#FF828790" BorderThickness="0,0,1,1"/>
-            <RichTextBox BorderBrush="#FF828790" BorderThickness="0,1,1,1">
+            <StatusBar Grid.Row="1" BorderBrush="#FF828790" BorderThickness="1,0,1,1"/>
+            <RichTextBox BorderBrush="#FF828790" BorderThickness="1,1,1,1">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text="RichTextBox"/>

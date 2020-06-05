@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,9 +12,9 @@ using System.Windows.Shapes;
 
 namespace SQLviewer
 {
-    public partial class Window1 : Window
+    public partial class AddDatabaseWindow : Window
     {
-        public Window1()
+        public AddDatabaseWindow()
         {
             InitializeComponent();
         }
@@ -24,16 +23,18 @@ namespace SQLviewer
         {
             var db = new Database
             {
-                server_name = server_name.Text,
-                login = login.Text,
-                password = password.Text
+                Server_name = server_name.Text,
+                Login = login.Text,
+                Password = password.Text
             };
-            using (var context = new Databases())
+
+            using (var context = new DatabasesContext())
             {
-                context.Db.Add(db); 
+                context.Db.Add(db);
                 context.SaveChanges();
             }
-            this.Close();
+
+            Close();
         }
     }
 }
