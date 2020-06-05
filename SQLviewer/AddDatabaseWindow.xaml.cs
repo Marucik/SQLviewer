@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,18 +15,22 @@ namespace SQLviewer
 {
     public partial class AddDatabaseWindow : Window
     {
+        private string hash;
+
         public AddDatabaseWindow()
         {
-            InitializeComponent();
+            InitializeComponent();        
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string pass_hash = Password_hash.Encrypt(password.Password);
             var db = new Database
             {
-                Server_name = server_name.Text,
+                Server_address = server_name.Text,
                 Login = login.Text,
-                Password = password.Text
+                Password = pass_hash
             };
 
             using (var context = new DatabasesContext())

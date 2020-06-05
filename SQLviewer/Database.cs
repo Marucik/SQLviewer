@@ -28,7 +28,7 @@ namespace SQLviewer
     public class Database
     {
         public int DatabaseID { get; set; }
-        public string Server_name { get; set; }
+        public string Server_address { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
     }
