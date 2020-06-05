@@ -77,16 +77,17 @@ namespace SQLviewer
             using var connection = new SqlConnection(specyficDB);
             connection.Open();
 
-            var command = new SqlCommand("SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE NOT TABLE_SCHEMA='sys'", connection);
+            var command = new SqlCommand("SELECT TABLE_SCHEMA, TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE NOT TABLE_SCHEMA='sys'", connection);
             var reader = command.ExecuteReader();
 
             List<string> Tables = new List<string>();
 
             while (reader.Read())
             {
-                string tableName = reader.GetString(0);
+                string tableSchema = reader.GetString(0);
+                string tableName = reader.GetString(1);
 
-                Tables.Add(tableName);
+                Tables.Add($"{tableSchema}.{tableName}");
             }
 
             TablesBox.IsEnabled = true;
@@ -106,37 +107,44 @@ namespace SQLviewer
             string specyficDB = connectionString.Replace("%%%", db);
 
             using var connection = new SqlConnection(specyficDB);
-            //connection.Open();
+            connection.Open();
 
-            //var command = new SqlCommand("SELECT " + 
-            //                                "c.name 'Column Name', " +
-            //                                "t.Name 'Data type', " +
-            //                                "c.max_length 'Max Length', " +
-            //                                "c.is_nullable, " +
-            //                                "ISNULL(i.is_primary_key, 0) 'Primary Key' " +
-            //                            "FROM " +
-            //                                "sys.columns c" +
-            //                            "INNER JOIN " +
-            //                                "sys.types t ON c.user_type_id = t.user_type_id " +
-            //                            "LEFT OUTER JOIN " +
-            //                                "sys.index_columns ic ON ic.object_id = c.object_id AND ic.column_id = c.column_id " +
-            //                            "LEFT OUTER JOIN " +
-            //                                "sys.indexes i ON ic.object_id = i.object_id AND ic.index_id = i.index_id " +
-            //                            "WHERE " +
-            //                                "c.object_id = OBJECT_ID('SalesLT.Address')"
-            //                                , connection);
-            //var reader = command.ExecuteReader();
+            var command = new SqlCommand("SELECT " +
+                                            "c.name 'ColumnName', " +
+                                            "t.Name 'DataType', " +
+                                            "c.max_length 'MaxLength', " +
+                                            "ISNULL(i.is_primary_key, 0) 'PrimaryKey' " +
+                                        "FROM " +
+                                            "sys.columns c " +
+                                        "INNER JOIN " +
+                                            "sys.types t ON c.user_type_id = t.user_type_id " +
+                                        "LEFT OUTER JOIN " +
+                                            "sys.index_columns ic ON ic.object_id = c.object_id AND ic.column_id = c.column_id " +
+                                        "LEFT OUTER JOIN " +
+                                            "sys.indexes i ON ic.object_id = i.object_id AND ic.index_id = i.index_id " +
+                                        "WHERE " +
+                                            $"c.object_id = OBJECT_ID('{table}')"
+                                            , connection);
 
-            //List<string> Columns = new List<string>();
+            var reader = command.ExecuteReader();
 
-            //while (reader.Read())
-            //{
-            //    string tableName = reader.GetString(0);
+            List<TableInfo> Columns = new List<TableInfo>();
 
-            //    Columns.Add(tableName);
-            //}
+            while (reader.Read())
+            {
+                string columnName = reader.GetString(0);
+                string dataType = reader.GetString(1);
+                int maxLength = reader.GetInt16(2);
+                bool primaryKey = reader.GetBoolean(3);
 
-            //connection.Close();
+                TableInfo tableInfo = new TableInfo(columnName, dataType, maxLength, primaryKey);
+
+                Columns.Add(tableInfo);
+            }
+
+            ColumnsList.ItemsSource = Columns;
+
+            connection.Close();
 
             e.Handled = true;
         }

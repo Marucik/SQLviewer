@@ -39,8 +39,8 @@
                 <ComboBox Name="TablesBox" HorizontalAlignment="Stretch" Margin="5,0,5,0" IsEnabled="False" SelectionChanged="TablesBox_SelectionChanged" />
             </StackPanel>
             <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,10,1,0" VerticalScrollBarVisibility="Auto">
-                <ListView BorderThickness="0,1,0,0" BorderBrush="#FF828790">
-
+                <ListView Name="ColumnsList" BorderThickness="0,1,0,0" BorderBrush="#FF828790">
+                    
                 </ListView>
             </ScrollViewer>
 
