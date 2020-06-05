@@ -29,7 +29,7 @@ namespace SQLviewer
             using (var context = new DatabasesContext())
             {
                 var connections = context.Db
-                                        .Select(q => new { ID = q.DatabaseID, q.Server_name, q.Login })
+                                        .Select(q => new { ID = q.DatabaseID, q.Server_address, q.Login })
                                         .ToList();
 
                 ConnectionList.ItemsSource = connections;
@@ -50,10 +50,10 @@ namespace SQLviewer
                 {
                     var connectionParams = context.Db
                                             .Where(q => q.DatabaseID == selectedDatabaseID)
-                                            .Select(q => new { q.Server_name, q.Login, q.Password })
+                                            .Select(q => new { q.Server_address, q.Login, q.Password })
                                             .FirstOrDefault();
-
-                    ConnectionString = $"Server=tcp:{connectionParams.Server_name},1433;Initial Catalog=%%%;User ID={connectionParams.Login};Password={connectionParams.Password};Connection Timeout=60";
+                    string decrypt_pass = Password_hash.Decrypt(connectionParams.Password);
+                    ConnectionString = $"Server=tcp:{connectionParams.Server_address},1433;Initial Catalog=%%%;User ID={connectionParams.Login};Password={decrypt_pass};Connection Timeout=60";
                 }
             }
 
