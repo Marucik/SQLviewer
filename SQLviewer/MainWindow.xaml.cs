@@ -164,5 +164,11 @@ namespace SQLviewer
 
             e.Handled = true;
         }
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            var EditDatabaseWindow = new EditDatabaseWindow();
+            EditDatabaseWindow.Show();
+        }
     }
 }

@@ -23,7 +23,7 @@
                 <MenuItem Header="Connect" Click="MenuItem_Click_1"/>
                 <Separator />
                 <MenuItem Header="Add" Click="MenuItem_Click"/>
-                <MenuItem Header="Edit"/>
+                <MenuItem Header="Edit" Click="MenuItem_Click_2"/>
                 <MenuItem Header="Remove"/>
             </MenuItem>
         </Menu>
