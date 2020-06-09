@@ -23,8 +23,8 @@
                 <MenuItem Header="Connect" Click="MenuItem_Click_1"/>
                 <Separator />
                 <MenuItem Header="Add" Click="MenuItem_Click"/>
-                <MenuItem Header="Edit"/>
-                <MenuItem Header="Remove"/>
+                <MenuItem Header="Edit" Click="MenuItem_Click_2"/>
+                <MenuItem Header="Remove" Click="MenuItem_Click_3"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0,19,0,0" Grid.RowSpan="2">
