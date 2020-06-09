@@ -8,11 +8,15 @@
         Title="Connect to database" Height="386" Width="554"
         ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="230*"/>
+            <ColumnDefinition Width="47*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="129*"/>
             <RowDefinition Height="241*"/>
         </Grid.RowDefinitions>
-        <Grid Height="127" VerticalAlignment="Center" HorizontalAlignment="Center" Width="321" Grid.Row="0">
+        <Grid Height="127" VerticalAlignment="Center" HorizontalAlignment="Center" Width="322">
             <Label Padding="0" Content="Server address:" HorizontalAlignment="Left" Margin="28,7,0,0" VerticalAlignment="Top" Width="170"/>
             <TextBox Name="ServerAddress" HorizontalAlignment="Left" Margin="28,28,0,0" VerticalAlignment="Top" Width="197"/>
             <Label Padding="0" Content="Port:" HorizontalAlignment="Left" Margin="254,10,0,0" VerticalAlignment="Top" Height="15" RenderTransformOrigin="0.5,0.5" Width="39" />
@@ -24,7 +28,7 @@
             <Button Name="ConnectOnce" Content="Connect" HorizontalAlignment="Center"  VerticalAlignment="Top" Width="76" Click="Connect_Click" Margin="0,97,0,0"/>
 
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
             <Rectangle Height="2" VerticalAlignment="Top"  Fill="#FFB6B6B6" />
             <DataGrid Name="ConnectionList" Margin="41,10,41,50" Grid.Row="1" IsReadOnly="True" HeadersVisibility="Column" ColumnWidth="auto" CanUserSortColumns="False" SelectionChanged="ConnectionList_SelectionChanged" />
             <Button Content="Connect" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="76" Click="Connect_Click" Margin="0,0,0,12"/>

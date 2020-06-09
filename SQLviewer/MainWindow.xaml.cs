@@ -161,6 +161,7 @@ namespace SQLviewer
             e.Handled = true;
         }
 
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string specyficDB = connectionString.Replace("%%%", currentDatabase);
@@ -182,6 +183,17 @@ namespace SQLviewer
 
             connection.Close();
             sqlDataAdapter.Dispose();
+
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
+            var EditDatabaseWindow = new EditDatabaseWindow();
+            EditDatabaseWindow.Show();
+        }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            var RemoveDatabaseWindow = new RemoveDatabaseWindow();
+            RemoveDatabaseWindow.Show();
         }
     }
 }

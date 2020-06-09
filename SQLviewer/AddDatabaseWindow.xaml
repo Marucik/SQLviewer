@@ -20,6 +20,5 @@
         <Label Padding="0" Content="Hasło:" HorizontalAlignment="Left" Margin="191,58,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="Password" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="191,0,0,0" KeyUp="Password_KeyUp"/>
         <Button Content="Dodaj" HorizontalAlignment="Left" Margin="235,116,0,0" VerticalAlignment="Top" Width="76" Click="Add_Click"/>
-
     </Grid>
 </Window>
