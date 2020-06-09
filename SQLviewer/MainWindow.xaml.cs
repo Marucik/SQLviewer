@@ -164,6 +164,11 @@ namespace SQLviewer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (currentDatabase == null)
+            {
+                return;
+            }
+
             string specyficDB = connectionString.Replace("%%%", currentDatabase);
 
             using var connection = new SqlConnection(specyficDB);
@@ -183,6 +188,7 @@ namespace SQLviewer
 
             connection.Close();
             sqlDataAdapter.Dispose();
+        }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
