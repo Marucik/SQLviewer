@@ -181,8 +181,15 @@ namespace SQLviewer
             DataTable dataTable = new DataTable();
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
-
-            sqlDataAdapter.Fill(dataTable);
+            try
+            {
+                sqlDataAdapter.Fill(dataTable);
+            }
+            catch
+            {
+                Results.DataContext = null;
+                
+            }
 
             Results.DataContext = dataTable.DefaultView;
 
