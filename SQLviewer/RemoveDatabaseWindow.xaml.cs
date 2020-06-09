@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,22 +9,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SQLviewer
 {
-    public partial class EditDatabaseWindow : Window
+    public partial class RemoveDatabaseWindow : Window
     {
         public ObservableCollection<dynamic> databaseEntries = new ObservableCollection<dynamic>();
-        public EditDatabaseWindow()
+        public RemoveDatabaseWindow()
         {
             InitializeComponent();
+
             using (var context = new DatabasesContext())
             {
                 var connections = context.Db
                                         .Select(q => new { ID = q.DatabaseID, Address = q.Server_address, Login = q.Login, Password = q.Password, Port = q.Port })
                                         .ToList();
 
-                foreach(var item in connections)
+                foreach (var item in connections)
                 {
                     databaseEntries.Add(item);
                 }
@@ -41,11 +42,13 @@ namespace SQLviewer
             if(ConnectionList.SelectedItem!=null)
             {
                 dynamic data = ConnectionList.SelectedItem;
-                var editwindow = new EditWindow(data.ID, data.Address, data.Login, data.Password, data.Port);
+                int id = data.ID;
 
-                if (editwindow.ShowDialog() == true)
+                using (var context = new DatabasesContext())
                 {
-
+                    var remove = context.Db.SingleOrDefault(q => q.DatabaseID == id);
+                    context.Db.Remove(remove);
+                    context.SaveChanges();
                 }
 
                 using (var context = new DatabasesContext())
@@ -61,7 +64,7 @@ namespace SQLviewer
                         databaseEntries.Add(item);
                     }
                 }
-            }            
+            }
         }
     }
 }

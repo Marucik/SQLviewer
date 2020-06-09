@@ -13,16 +13,18 @@ using System.Windows.Shapes;
 
 namespace SQLviewer
 {
-    /// <summary>
-    /// Logika interakcji dla klasy EditWindow.xaml
-    /// </summary>
     public partial class EditWindow : Window
     {
         public int id_db;
-        public EditWindow(int id)
+        public EditWindow(int id, string svr_address, string lgn, string pswd, string prt)
         {
             InitializeComponent();
+
             id_db = id;
+            server_address.Text = svr_address;
+            login.Text = lgn;
+            password.Text = PasswordHash.Decrypt(pswd);
+            port.Text = prt;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -30,11 +32,13 @@ namespace SQLviewer
             using (var context = new DatabasesContext())
             {
                 var update = context.Db.SingleOrDefault(q => q.DatabaseID == id_db);
+                string encrypt_pass = PasswordHash.Encrypt(password.Text);
+
                 update.Server_address = server_address.Text;
                 update.Login = login.Text;
-                string encrypt_pass = PasswordHash.Encrypt(password.Text);
                 update.Password = encrypt_pass;
                 update.Port = port.Text;
+
                 context.SaveChanges();
                 this.Close();
             }

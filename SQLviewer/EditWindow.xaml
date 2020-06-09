@@ -5,13 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SQLviewer"
         mc:Ignorable="d"
-        Title="EditWindow" Height="250" Width="800">
+        Title="EditWindow" Height="200" Width="590">
     <Grid>
-        <TextBox x:Name="server_address" HorizontalAlignment="Left" Margin="65,80,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="158" Height="35"/>
-        <TextBox x:Name="login" HorizontalAlignment="Left" Margin="293,80,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="169" Height="36"/>
-        <TextBox x:Name="password" HorizontalAlignment="Left" Margin="528,80,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="36"/>
-        <Button Content="Edit" HorizontalAlignment="Left" Margin="293,161,0,0" VerticalAlignment="Top" Height="25" Width="138" Click="Button_Click"/>
-        <TextBox x:Name="port" HorizontalAlignment="Left" Margin="708,80,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Height="25"/>
+        <TextBox x:Name="server_address" HorizontalAlignment="Left" Margin="30,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <TextBox x:Name="login" HorizontalAlignment="Left" Margin="180,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <TextBox x:Name="password" HorizontalAlignment="Left" Margin="330,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="20"/>
+        <Button Content="Edit" HorizontalAlignment="Left" Margin="235,120,0,0" VerticalAlignment="Top" Height="20" Width="100" Click="Button_Click"/>
+        <TextBox x:Name="port" HorizontalAlignment="Left" Margin="480,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="20"/>
+        <Label Content="Server address:" Padding="0" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Login:" Padding="0" HorizontalAlignment="Left" Margin="180,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Password:" Padding="0" HorizontalAlignment="Left" Margin="330,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Port:" Padding="0" HorizontalAlignment="Left" Margin="480,50,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

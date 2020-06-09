@@ -170,5 +170,11 @@ namespace SQLviewer
             var EditDatabaseWindow = new EditDatabaseWindow();
             EditDatabaseWindow.Show();
         }
+
+        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        {
+            var RemoveDatabaseWindow = new RemoveDatabaseWindow();
+            RemoveDatabaseWindow.Show();
+        }
     }
 }
