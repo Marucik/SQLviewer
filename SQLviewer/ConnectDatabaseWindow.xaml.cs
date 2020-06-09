@@ -26,17 +26,15 @@ namespace SQLviewer
             InitializeComponent();
             DataContext = this;
 
-            using (var context = new DatabasesContext())
-            {
-                var connections = context.Db
-                                        .Select(q => new { ID = q.DatabaseID, q.Server_address, q.Login })
-                                        .ToList();
+            using var context = new DatabasesContext();
+            var connections = context.Db
+                                .Select(q => new { ID = q.DatabaseID, q.Server_address, q.Login })
+                                .ToList();
 
-                ConnectionList.ItemsSource = connections;
-            }
+            ConnectionList.ItemsSource = connections;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Connect_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
 
@@ -46,15 +44,14 @@ namespace SQLviewer
             } 
             else
             {
-                using (var context = new DatabasesContext())
-                {
-                    var connectionParams = context.Db
+                using var context = new DatabasesContext();
+                var connectionParams = context.Db
                                             .Where(q => q.DatabaseID == selectedDatabaseID)
                                             .Select(q => new { q.Server_address, q.Login, q.Password, q.Port })
                                             .FirstOrDefault();
-                    string decrypt_pass = PasswordHash.Decrypt(connectionParams.Password);
-                    ConnectionString = $"Server=tcp:{connectionParams.Server_address},{connectionParams.Port};Initial Catalog=%%%;User ID={connectionParams.Login};Password={decrypt_pass};Connection Timeout=15";
-                }
+
+                string decrypt_pass = PasswordHash.Decrypt(connectionParams.Password);
+                ConnectionString = $"Server=tcp:{connectionParams.Server_address},{connectionParams.Port};Initial Catalog=%%%;User ID={connectionParams.Login};Password={decrypt_pass};Connection Timeout=15";
             }
 
             DialogResult = true;
@@ -66,6 +63,16 @@ namespace SQLviewer
             dynamic data = grid.SelectedItem;
 
             selectedDatabaseID = data.ID;
+        }
+
+        private void Password_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                ConnectionString = $"Server=tcp:{ServerAddress.Text},{Port.Text};Initial Catalog=%%%;User ID={Login.Text};Password={Password.Password};Connection Timeout=15";
+                DialogResult = true;
+            }
+
         }
     }
 }
