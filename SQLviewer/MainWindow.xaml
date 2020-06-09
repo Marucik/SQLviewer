@@ -12,49 +12,61 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="215*"/>
+            <ColumnDefinition Width="0.6"/>
+            <ColumnDefinition Width="659*"/>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0" Grid.ColumnSpan="2">
-            <MenuItem Header="File" Height="auto" Width="50">
-                <MenuItem Header="Export results"/>
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="File" Height="auto" Width="auto">
+                <MenuItem Header="Export results as CSV" Click="SaveToCSV_Click"/>
+            </MenuItem>
+            <MenuItem Header="Server" Height="auto" Width="auto">
+                <MenuItem Header="Connect" Click="MenuItem_Click_1"/>
+                <Separator />
+                <MenuItem Header="Add" Click="MenuItem_Click"/>
+                <MenuItem Header="Edit" Click="EditDatabase_Click"/>
+                <MenuItem Header="Remove" Click="RemoveDatabase_Click"/>
             </MenuItem>
         </Menu>
-        <Grid Grid.Row="1">
+        <Grid Margin="0,19,0,0" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="23.002"/>
+                <RowDefinition Height="102"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Menu Grid.Row="0" Background="#FFF3F3F3" BorderBrush="#FF7F899C" BorderThickness="0,1,1,0">
-                <MenuItem Header="Add" Height="22"/>
-                <MenuItem Header="Remove" Height="22"/>
-                <MenuItem Header="Edit" Height="22"/>
-            </Menu>
-            <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,1,0" VerticalScrollBarVisibility="Auto">
-                <TreeView >
-                    <TreeViewItem Header="Serwer szkoly: zst.xd.pl:3001" IsExpanded="True">
-                        <TreeViewItem Header="TreeViewItem" IsExpanded="True">
-                            <TreeViewItem Header="TreeViewItem"/>
-                        </TreeViewItem>
-                    </TreeViewItem>
-                </TreeView>
+            <StackPanel Grid.Row="0">
+                <Label Content="Database" Padding="0" Margin="5,5,5,0"/>
+                <ComboBox Name="DatabasesBox" Text="Select db" HorizontalAlignment="Stretch" Margin="5,0,5,0" IsEnabled="False" SelectionChanged="DatabasesBox_SelectionChanged" />
+                <Label Content="Table" Padding="0" Margin="5,5,5,0"/>
+                <ComboBox Name="TablesBox" HorizontalAlignment="Stretch" Margin="5,0,5,0" IsEnabled="False" SelectionChanged="TablesBox_SelectionChanged" />
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,10,1,0" VerticalScrollBarVisibility="Auto">
+                <ListView Name="ColumnsList" BorderThickness="0,1,0,0" BorderBrush="#FF828790">
+
+                </ListView>
             </ScrollViewer>
 
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Border Grid.Column="1" Grid.Row="1" Background="Black"></Border>
+        <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="29*"/>
-                <RowDefinition/>
+                <RowDefinition Height="182*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="63*"/>
             </Grid.RowDefinitions>
-
-            <StatusBar Grid.Row="1" BorderBrush="#FF828790" BorderThickness="0,0,1,1"/>
-            <RichTextBox BorderBrush="#FF828790" BorderThickness="0,1,1,1">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text="RichTextBox"/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <Label Content="Type in your query:"/>
+                    <Button Content="Commit query" Margin="51,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CommitQuery_Click"/>
+                    
+                </StackPanel>
+                <TextBox Name="Query" Text="" Grid.Row="1" AcceptsReturn="True"/>
+            </Grid>
+            <GridSplitter HorizontalAlignment="Stretch"  Grid.Row="1"/>
+            <DataGrid ItemsSource="{Binding}" Name="Results" Grid.Row="2"/>
         </Grid>
     </Grid>
 </Window>
