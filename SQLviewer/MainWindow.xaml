@@ -13,9 +13,10 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="215*"/>
-            <ColumnDefinition Width="681*"/>
+            <ColumnDefinition Width="0.6"/>
+            <ColumnDefinition Width="659*"/>
         </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="File" Height="auto" Width="auto">
                 <MenuItem Header="Export results"/>
             </MenuItem>
@@ -40,25 +41,32 @@
             </StackPanel>
             <ScrollViewer Grid.Row="1" BorderBrush="Black" BorderThickness="0,10,1,0" VerticalScrollBarVisibility="Auto">
                 <ListView Name="ColumnsList" BorderThickness="0,1,0,0" BorderBrush="#FF828790">
-                    
+
                 </ListView>
             </ScrollViewer>
 
         </Grid>
-        <Grid Grid.Column="1" Margin="0,19,0,0" Grid.RowSpan="2">
+        <Border Grid.Column="1" Grid.Row="1" Background="Black"></Border>
+        <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="29*"/>
-                <RowDefinition/>
+                <RowDefinition Height="182*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="63*"/>
             </Grid.RowDefinitions>
-
-            <StatusBar Grid.Row="1" BorderBrush="#FF828790" BorderThickness="1,0,1,1"/>
-            <RichTextBox BorderBrush="#FF828790" BorderThickness="1,1,1,1">
-                <FlowDocument>
-                    <Paragraph>
-                        <Run Text="RichTextBox"/>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <Label Content="Type in your query:"/>
+                    <Button Content="Commit query" Margin="51,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click"/>
+                    
+                </StackPanel>
+                <TextBox Name="Query" Text="" Grid.Row="1" AcceptsReturn="True"/>
+            </Grid>
+            <GridSplitter HorizontalAlignment="Stretch"  Grid.Row="1"/>
+            <DataGrid ItemsSource="{Binding}" Name="Results" Grid.Row="2"/>
         </Grid>
     </Grid>
 </Window>

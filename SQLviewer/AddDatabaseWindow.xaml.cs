@@ -20,8 +20,22 @@ namespace SQLviewer
             InitializeComponent();        
         }
 
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddDatabase();
+            e.Handled = true;
+        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Password_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                AddDatabase();
+                e.Handled = true;
+            }
+        }
+
+        private void AddDatabase()
         {
             string pass_hash = PasswordHash.Encrypt(Password.Password);
 

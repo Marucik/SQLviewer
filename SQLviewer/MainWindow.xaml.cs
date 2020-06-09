@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SQLviewer
 {
     public partial class MainWindow : Window
     {
         private string connectionString;
+        private string currentDatabase;
 
         public MainWindow()
         {
@@ -88,6 +78,8 @@ namespace SQLviewer
             var comboBox = sender as ComboBox;
             string db = comboBox.SelectedItem as string;
 
+            currentDatabase = db;
+
             string specyficDB = connectionString.Replace("%%%", db);
 
             using var connection = new SqlConnection(specyficDB);
@@ -118,9 +110,8 @@ namespace SQLviewer
         {
             var comboBox = sender as ComboBox;
             string table = comboBox.SelectedItem as string;
-            string db = DatabasesBox.SelectedItem as string;
 
-            string specyficDB = connectionString.Replace("%%%", db);
+            string specyficDB = connectionString.Replace("%%%", currentDatabase);
 
             using var connection = new SqlConnection(specyficDB);
             connection.Open();
@@ -162,7 +153,35 @@ namespace SQLviewer
 
             connection.Close();
 
+            if (Query.Text == "")
+            {
+                Query.Text = $"SELECT * FROM {table}";
+            }
+
             e.Handled = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string specyficDB = connectionString.Replace("%%%", currentDatabase);
+
+            using var connection = new SqlConnection(specyficDB);
+            connection.Open();
+
+            string query = Query.Text.Replace("\r\n", " ");
+
+            var command = new SqlCommand(query, connection);
+
+            DataTable dataTable = new DataTable();
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+
+            sqlDataAdapter.Fill(dataTable);
+
+            Results.DataContext = dataTable.DefaultView;
+
+            connection.Close();
+            sqlDataAdapter.Dispose();
         }
     }
 }
