@@ -16,11 +16,17 @@ using System.Windows.Shapes;
 
 namespace SQLviewer
 {
+    /// <summary>
+    /// klasa odpowiadająca za interakcje uzytkownika w oknie polaczenia z dana baza
+    /// </summary>
     public partial class ConnectDatabaseWindow : Window
     {
         private int selectedDatabaseID;
         public string ConnectionString;
 
+        /// <summary>
+        /// kontruktor klasy ktory inicjalizuje komponenty i wyswietlajacy liste baz
+        /// </summary>
         public ConnectDatabaseWindow()
         {
             InitializeComponent();
@@ -34,6 +40,11 @@ namespace SQLviewer
             ConnectionList.ItemsSource = connections;
         }
 
+        /// <summary>
+        /// metoda ktora laczy z dana baza po wpisaniu jej danych lub wybraniu z listy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -57,6 +68,11 @@ namespace SQLviewer
             DialogResult = true;
         }
 
+        /// <summary>
+        /// metoda ktora przypisuje id wybranego rekordu do pola selectedDatabaseID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConnectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var grid = sender as DataGrid;
@@ -65,6 +81,11 @@ namespace SQLviewer
             selectedDatabaseID = data.ID;
         }
 
+        /// <summary>
+        /// metoda ktora pozwola nawiazac polaczenie poprzez wcisniecie klawisza Enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Password_KeyUp(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)

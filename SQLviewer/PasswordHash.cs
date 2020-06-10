@@ -5,10 +5,18 @@ using System.Security.Cryptography;
 
 namespace SQLviewer
 {
+    /// <summary>
+    /// klasa odpowiadająca za szyfrowanie i deszyfrowanie hasel
+    /// </summary>
     class PasswordHash
     {
         static string key { get; set; } = "A!9HHhi%XjjYY4YP2@Nob009X";
 
+        /// <summary>
+        /// metoda ktora pobiera haslo jako argument po czym zaszyfrowuje je
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static string Encrypt(string text)
         {
             using (var md5 = new MD5CryptoServiceProvider())
@@ -29,6 +37,11 @@ namespace SQLviewer
             }
         }
 
+        /// <summary>
+        /// metoda ktora pobiera zaszyfrowane haslo jako argument po czym rozszyfrowuje je
+        /// </summary>
+        /// <param name="cipher"></param>
+        /// <returns></returns>
         public static string Decrypt(string cipher)
         {
             using (var md5 = new MD5CryptoServiceProvider())

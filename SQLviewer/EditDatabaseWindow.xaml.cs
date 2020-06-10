@@ -14,9 +14,16 @@ using System.Windows.Shapes;
 
 namespace SQLviewer
 {
+    /// <summary>
+    /// klasa odpowiadająca za interakcje uzytkownika w oknie wyboru bazy do edycji
+    /// </summary>
     public partial class EditDatabaseWindow : Window
     {
         public ObservableCollection<dynamic> databaseEntries = new ObservableCollection<dynamic>();
+
+        /// <summary>
+        /// kontruktor klasy ktory inicjalizuje komponenty oraz wyswietla dane z pliku z zapisanymi bazami po czym zapisuje je do tablicy
+        /// </summary>
         public EditDatabaseWindow()
         {
             InitializeComponent();
@@ -36,6 +43,11 @@ namespace SQLviewer
             ConnectionList.ItemsSource = databaseEntries;
         }
 
+        /// <summary>
+        /// metoda ktora wyswietla okno do edycji danego rekordu po czym odswieza swoja zawartosc
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(ConnectionList.SelectedItem!=null)
