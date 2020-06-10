@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace SQLviewer
 {
-    class PasswordHash
+    public class PasswordHash
     {
         static string key { get; set; } = "A!9HHhi%XjjYY4YP2@Nob009X";
 
