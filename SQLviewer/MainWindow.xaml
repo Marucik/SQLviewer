@@ -18,14 +18,14 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="File" Height="auto" Width="auto">
-                <MenuItem Header="Export results"/>
+                <MenuItem Header="Export results as CSV" Click="SaveToCSV_Click"/>
             </MenuItem>
             <MenuItem Header="Server" Height="auto" Width="auto">
                 <MenuItem Header="Connect" Click="MenuItem_Click_1"/>
                 <Separator />
                 <MenuItem Header="Add" Click="MenuItem_Click"/>
-                <MenuItem Header="Edit" Click="MenuItem_Click_2"/>
-                <MenuItem Header="Remove" Click="MenuItem_Click_3"/>
+                <MenuItem Header="Edit" Click="EditDatabase_Click"/>
+                <MenuItem Header="Remove" Click="RemoveDatabase_Click"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0,19,0,0" Grid.RowSpan="2">
@@ -60,7 +60,7 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
                     <Label Content="Type in your query:"/>
-                    <Button Content="Commit query" Margin="51,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click"/>
+                    <Button Content="Commit query" Margin="51,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Click="CommitQuery_Click"/>
                     
                 </StackPanel>
                 <TextBox Name="Query" Text="" Grid.Row="1" AcceptsReturn="True"/>

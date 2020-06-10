@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SQLviewer
 {
@@ -162,7 +165,7 @@ namespace SQLviewer
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CommitQuery_Click(object sender, RoutedEventArgs e)
         {
             if (currentDatabase == null)
             {
@@ -181,8 +184,15 @@ namespace SQLviewer
             DataTable dataTable = new DataTable();
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
-
-            sqlDataAdapter.Fill(dataTable);
+            try
+            {
+                sqlDataAdapter.Fill(dataTable);
+            }
+            catch
+            {
+                Results.DataContext = null;
+                
+            }
 
             Results.DataContext = dataTable.DefaultView;
 
@@ -190,16 +200,31 @@ namespace SQLviewer
             sqlDataAdapter.Dispose();
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        private void EditDatabase_Click(object sender, RoutedEventArgs e)
         {
             var EditDatabaseWindow = new EditDatabaseWindow();
             EditDatabaseWindow.Show();
         }
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        private void RemoveDatabase_Click(object sender, RoutedEventArgs e)
         {
             var RemoveDatabaseWindow = new RemoveDatabaseWindow();
             RemoveDatabaseWindow.Show();
+        }
+
+        private void SaveToCSV_Click(object sender, RoutedEventArgs e)
+        {
+            Results.SelectAllCells();
+            Results.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, Results);
+            Results.UnselectAllCells();
+            string scrapedResults = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "comma-separated values (*.csv)| *.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, scrapedResults);
         }
     }
 }
