@@ -1,30 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SQLviewer
 {
-    public partial class MainWindow : Window
+    /// <summary>
+    /// Klasa odpowiadająca za interakcje uzytkownika w oknie glownym
+    /// </summary>
+    public partial class MainWindow : Window 
     {
         private string connectionString;
         private string currentDatabase;
 
-        public MainWindow()
+        /// <summary>
+        /// kontruktor klasy ktory inicjalizuje komponenty
+        /// </summary>
+        public MainWindow() 
         {
             InitializeComponent();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// metoda ktora otwiera okno dodawania bazy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click(object sender, RoutedEventArgs e)  
         {
             var AddDatabasewindow = new AddDatabaseWindow();
             AddDatabasewindow.Show();
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            var ConnectDatabaseWindow = new ConnectDatabaseWindow();
+        /// <summary>
+        /// metoda ktora otwiera okno polaczenia z baza za pomoca polaczenia jednorazowego lub wybrania bazy z listy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)  
+        {                                                                
+            var ConnectDatabaseWindow = new ConnectDatabaseWindow();     
 
             if (ConnectDatabaseWindow.ShowDialog() == true)
             {
@@ -73,9 +92,14 @@ namespace SQLviewer
             e.Handled = true;
         }
 
-        private void DatabasesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = sender as ComboBox;
+        /// <summary>
+        /// metoda ktora wyswietla liste baz w liscie rozwijanej po polaczeniu z baza danych
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DatabasesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)  
+        {                                                                                       
+            var comboBox = sender as ComboBox;                                                  
             string db = comboBox.SelectedItem as string;
 
             currentDatabase = db;
@@ -106,9 +130,14 @@ namespace SQLviewer
             e.Handled = true;
         }
 
-        private void TablesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = sender as ComboBox;
+        /// <summary>
+        /// metoda ktora wyswietla liste tabel z wybranej bezy 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TablesBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {                                                                                    
+            var comboBox = sender as ComboBox;                                              
             string table = comboBox.SelectedItem as string;
 
             string specyficDB = connectionString.Replace("%%%", currentDatabase);
@@ -161,9 +190,13 @@ namespace SQLviewer
             e.Handled = true;
         }
 
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+        /// <summary>
+        /// metoda ktora wysyla zapytanie SQL z textboxa do DataGrida ktory wyswietla jego wynik
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CommitQuery_Click(object sender, RoutedEventArgs e) 
+        {                                                                  
             if (currentDatabase == null)
             {
                 return;
@@ -197,16 +230,46 @@ namespace SQLviewer
             sqlDataAdapter.Dispose();
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// metoda ktora otwiera okno edytowania bazy z listy
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditDatabase_Click(object sender, RoutedEventArgs e)  
         {
             var EditDatabaseWindow = new EditDatabaseWindow();
             EditDatabaseWindow.Show();
         }
 
-        private void MenuItem_Click_3(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// metoda ktora otwiera okno usuwania bazy z listy 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RemoveDatabase_Click(object sender, RoutedEventArgs e) 
         {
             var RemoveDatabaseWindow = new RemoveDatabaseWindow();
             RemoveDatabaseWindow.Show();
+        }
+
+        /// <summary>
+        /// metoda ktora zapisuje tabele z bazy do pliku CSV
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SaveToCSV_Click(object sender, RoutedEventArgs e)  
+        {
+            Results.SelectAllCells();
+            Results.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            ApplicationCommands.Copy.Execute(null, Results);
+            Results.UnselectAllCells();
+            string scrapedResults = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "comma-separated values (*.csv)| *.csv";
+
+            if (saveFileDialog.ShowDialog() == true)
+                File.WriteAllText(saveFileDialog.FileName, scrapedResults);
         }
     }
 }
