@@ -13,19 +13,35 @@ using System.Windows.Shapes;
 
 namespace SQLviewer
 {
+    /// <summary>
+    /// klasa odpowiadająca za interakcje uzytkownika w oknie dodawania bazy
+    /// </summary>
     public partial class AddDatabaseWindow : Window
     {
+        /// <summary>
+        /// kontruktor klasy ktory inicjalizuje komponenty
+        /// </summary>
         public AddDatabaseWindow()
         {
             InitializeComponent();        
         }
 
+        /// <summary>
+        /// metoda ktora wywoluje metode AddDatabase po kliknieciu buttona
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             AddDatabase();
             e.Handled = true;
         }
 
+        /// <summary>
+        /// metoda ktora wywoluje metode AddDatabase po wcisnieciu klawisza enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Password_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -35,6 +51,9 @@ namespace SQLviewer
             }
         }
 
+        /// <summary>
+        /// metoda ktora dodaje baze
+        /// </summary>
         private void AddDatabase()
         {
             string pass_hash = PasswordHash.Encrypt(Password.Password);

@@ -13,9 +13,21 @@ using System.Windows.Shapes;
 
 namespace SQLviewer
 {
+    /// <summary>
+    /// klasa odpowiadająca za interakcje uzytkownika w oknie edytowania baz z listy
+    /// </summary>
     public partial class EditWindow : Window
     {
         public int id_db;
+
+        /// <summary>
+        /// kontruktor klasy ktory inicjalizuje komponenty oraz przypisuje argumenty do textBoxow
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="svr_address"></param>
+        /// <param name="lgn"></param>
+        /// <param name="pswd"></param>
+        /// <param name="prt"></param>
         public EditWindow(int id, string svr_address, string lgn, string pswd, string prt)
         {
             InitializeComponent();
@@ -27,6 +39,11 @@ namespace SQLviewer
             port.Text = prt;
         }
 
+        /// <summary>
+        /// metoda ktora edytuje dany rekord i zamyka okno edytowania
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             using (var context = new DatabasesContext())

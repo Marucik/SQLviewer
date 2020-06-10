@@ -17,8 +17,8 @@
         <TextBox x:Name="Port" HorizontalAlignment="Left" Margin="279,35,0,0" Text="1433" VerticalAlignment="Top" Width="32" Height="18"/>
         <Label Padding="0" Content="Login:" HorizontalAlignment="Left" Margin="47,57,0,0" VerticalAlignment="Top" Width="42" RenderTransformOrigin="0.595,1.945"/>
         <TextBox x:Name="Login" HorizontalAlignment="Left" Margin="47,0,0,0" VerticalAlignment="Center" Width="120" Grid.ColumnSpan="2"/>
-        <Label Padding="0" Content="Hasło:" HorizontalAlignment="Left" Margin="191,58,0,0" VerticalAlignment="Top"/>
+        <Label Padding="0" Content="Password:" HorizontalAlignment="Left" Margin="191,58,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="Password" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Margin="191,0,0,0" KeyUp="Password_KeyUp"/>
-        <Button Content="Dodaj" HorizontalAlignment="Left" Margin="235,116,0,0" VerticalAlignment="Top" Width="76" Click="Add_Click"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="235,116,0,0" VerticalAlignment="Top" Width="76" Click="Add_Click"/>
     </Grid>
 </Window>
