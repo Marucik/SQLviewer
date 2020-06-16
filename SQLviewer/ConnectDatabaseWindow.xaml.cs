@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
+﻿using System.Data;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SQLviewer
 {
     /// <summary>
-    /// klasa odpowiadająca za interakcje uzytkownika w oknie polaczenia z dana baza
+    /// Klasa odpowiadająca za interakcje uzytkownika w oknie polaczenia z dana baza.
     /// </summary>
     public partial class ConnectDatabaseWindow : Window
     {
@@ -25,7 +15,7 @@ namespace SQLviewer
         public string ConnectionString;
 
         /// <summary>
-        /// kontruktor klasy ktory inicjalizuje komponenty i wyswietlajacy liste baz
+        /// Kontruktor klasy ktory inicjalizuje komponenty i wyswietlajacy liste baz.
         /// </summary>
         public ConnectDatabaseWindow()
         {
@@ -41,10 +31,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora laczy z dana baza po wpisaniu jej danych lub wybraniu z listy
+        /// metoda ktora laczy z dana baza po wpisaniu jej danych lub wybraniu z listy.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -69,10 +57,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora przypisuje id wybranego rekordu do pola selectedDatabaseID
+        /// Metoda ktora przypisuje id wybranego rekordu do pola selectedDatabaseID.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ConnectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var grid = sender as DataGrid;
@@ -82,10 +68,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora pozwola nawiazac polaczenie poprzez wcisniecie klawisza Enter
+        /// Metoda ktora pozwola nawiazac polaczenie poprzez wcisniecie klawisza Enter.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Password_KeyUp(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)

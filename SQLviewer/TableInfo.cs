@@ -5,7 +5,7 @@ using System.Text;
 namespace SQLviewer
 {
     /// <summary>
-    /// klasa ktora przechowuje informacje o tabeli
+    /// Klasa ktora przechowuje informacje o tabeli.
     /// </summary>
     class TableInfo
     {
@@ -15,12 +15,12 @@ namespace SQLviewer
         public bool PrimaryKey;
 
         /// <summary>
-        /// konstruktor ktory przypisuje argumenty do pol publicznych klasy
+        /// Konstruktor ktory przypisuje argumenty do pol publicznych klasy.
         /// </summary>
-        /// <param name="columnName"></param>
-        /// <param name="dataType"></param>
-        /// <param name="maxLength"></param>
-        /// <param name="primaryKey"></param>
+        /// <param name="columnName">Nazwa kolumny.</param>
+        /// <param name="dataType">Typ danych</param>
+        /// <param name="maxLength">Długość pola</param>
+        /// <param name="primaryKey">Informacja o byciu KluczemGłównym.</param>
         public TableInfo(string columnName, string dataType, int maxLength, bool primaryKey)
         {
             ColumnName = columnName;
@@ -30,9 +30,9 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda przeslaniajaca ktora zwraca wartosci z pol publicznych
+        /// Metoda przeslaniajaca ktora zwraca wartosci z pól publicznych.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Zwraca dane w postaci <see cref="string"/>a.</returns>
         public override string ToString()
         {
             string pk = PrimaryKey ? "; PK]" : "]";

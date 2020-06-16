@@ -1,8 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SQLviewer;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SQLviewer.Tests
 {

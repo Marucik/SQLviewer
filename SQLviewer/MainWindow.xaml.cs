@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace SQLviewer
 {
     /// <summary>
-    /// Klasa odpowiadająca za interakcje uzytkownika w oknie glownym
+    /// Klasa odpowiadająca za interakcje uzytkownika w oknie glownym.
     /// </summary>
     public partial class MainWindow : Window 
     {
@@ -18,7 +18,7 @@ namespace SQLviewer
         private string currentDatabase;
 
         /// <summary>
-        /// kontruktor klasy ktory inicjalizuje komponenty
+        /// Kontruktor klasy ktory inicjalizuje komponenty.
         /// </summary>
         public MainWindow() 
         {
@@ -26,10 +26,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora otwiera okno dodawania bazy
+        /// Metoda ktora otwiera okno dodawania bazy.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MenuItem_Click(object sender, RoutedEventArgs e)  
         {
             var AddDatabasewindow = new AddDatabaseWindow();
@@ -37,10 +35,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora otwiera okno polaczenia z baza za pomoca polaczenia jednorazowego lub wybrania bazy z listy
+        /// Metoda ktora otwiera okno polaczenia z baza za pomoca polaczenia jednorazowego lub wybrania bazy z listy.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)  
         {                                                                
             var ConnectDatabaseWindow = new ConnectDatabaseWindow();     
@@ -93,10 +89,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora wyswietla liste baz w liscie rozwijanej po polaczeniu z baza danych
+        /// Metoda ktora wyswietla liste baz w liscie rozwijanej po polaczeniu z baza danych.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DatabasesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)  
         {                                                                                       
             var comboBox = sender as ComboBox;                                                  
@@ -131,10 +125,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora wyswietla liste tabel z wybranej bezy 
+        /// Metoda ktora wyswietla liste tabel z wybranej bazy.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void TablesBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {                                                                                    
             var comboBox = sender as ComboBox;                                              
@@ -191,10 +183,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora wysyla zapytanie SQL z textboxa do DataGrida ktory wyswietla jego wynik
+        /// Metoda ktora wysyla zapytanie SQL z textboxa do DataGrida ktory wyswietla jego wynik.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CommitQuery_Click(object sender, RoutedEventArgs e) 
         {                                                                  
             if (currentDatabase == null)
@@ -231,10 +221,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora otwiera okno edytowania bazy z listy
+        /// Metoda ktora otwiera okno edytowania bazy z listy.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void EditDatabase_Click(object sender, RoutedEventArgs e)  
         {
             var EditDatabaseWindow = new EditDatabaseWindow();
@@ -242,10 +230,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora otwiera okno usuwania bazy z listy 
+        /// Metoda ktora otwiera okno usuwania bazy z listy. 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void RemoveDatabase_Click(object sender, RoutedEventArgs e) 
         {
             var RemoveDatabaseWindow = new RemoveDatabaseWindow();
@@ -253,10 +239,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora zapisuje tabele z bazy do pliku CSV
+        /// Metoda ktora zapisuje tabele z bazy do pliku CSV.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void SaveToCSV_Click(object sender, RoutedEventArgs e)  
         {
             Results.SelectAllCells();
@@ -265,11 +249,15 @@ namespace SQLviewer
             Results.UnselectAllCells();
             string scrapedResults = (string)Clipboard.GetData(DataFormats.CommaSeparatedValue);
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "comma-separated values (*.csv)| *.csv";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "comma-separated values (*.csv)| *.csv"
+            };
 
             if (saveFileDialog.ShowDialog() == true)
+            {
                 File.WriteAllText(saveFileDialog.FileName, scrapedResults);
+            }
         }
     }
 }
