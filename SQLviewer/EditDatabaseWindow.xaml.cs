@@ -15,14 +15,14 @@ using System.Windows.Shapes;
 namespace SQLviewer
 {
     /// <summary>
-    /// klasa odpowiadająca za interakcje uzytkownika w oknie wyboru bazy do edycji
+    /// Klasa odpowiadająca za interakcje uzytkownika w oknie wyboru bazy do edycji.
     /// </summary>
     public partial class EditDatabaseWindow : Window
     {
         public ObservableCollection<dynamic> databaseEntries = new ObservableCollection<dynamic>();
 
         /// <summary>
-        /// kontruktor klasy ktory inicjalizuje komponenty oraz wyswietla dane z pliku z zapisanymi bazami po czym zapisuje je do tablicy
+        /// Kontruktor klasy ktory inicjalizuje komponenty oraz wyswietla dane z pliku z zapisanymi bazami po czym zapisuje je do tablicy.
         /// </summary>
         public EditDatabaseWindow()
         {
@@ -30,7 +30,7 @@ namespace SQLviewer
             using (var context = new DatabasesContext())
             {
                 var connections = context.Db
-                                        .Select(q => new { ID = q.DatabaseID, Address = q.Server_address, Login = q.Login, Password = q.Password, Port = q.Port })
+                                        .Select(q => new { ID = q.DatabaseID, Address = q.Server_address, q.Login, q.Password, q.Port })
                                         .ToList();
 
                 foreach(var item in connections)
@@ -44,10 +44,8 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora wyswietla okno do edycji danego rekordu po czym odswieza swoja zawartosc
+        /// Metoda ktora wyswietla okno do edycji danego rekordu po czym odswieza swoja zawartosc.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(ConnectionList.SelectedItem!=null)
@@ -60,18 +58,16 @@ namespace SQLviewer
 
                 }
 
-                using (var context = new DatabasesContext())
+                using var context = new DatabasesContext();
+                var connections = context.Db
+                            .Select(q => new { ID = q.DatabaseID, Address = q.Server_address, q.Login, q.Password, q.Port })
+                            .ToList();
+
+                databaseEntries.Clear();
+
+                foreach (var item in connections)
                 {
-                    var connections = context.Db
-                                            .Select(q => new { ID = q.DatabaseID, Address = q.Server_address, Login = q.Login, Password = q.Password, Port = q.Port })
-                                            .ToList();
-
-                    databaseEntries.Clear();
-
-                    foreach (var item in connections)
-                    {
-                        databaseEntries.Add(item);
-                    }
+                    databaseEntries.Add(item);
                 }
             }            
         }

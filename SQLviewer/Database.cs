@@ -4,7 +4,7 @@ using System;
 namespace SQLviewer
 {
     /// <summary>
-    /// klasa dziedziczaca z DbContext ktora przypisuje wlasciwosci z klasy Database do tablicy jako rekord i zapisuje w pliku Databases.db
+    /// Klasa dziedziczaca z DbContext ktora przypisuje wlasciwosci z klasy Database do tablicy jako rekord i zapisuje w pliku Databases.db.
     /// </summary>
     public class DatabasesContext : DbContext
     {
@@ -12,7 +12,7 @@ namespace SQLviewer
         private static bool _created = false;
 
         /// <summary>
-        /// metoda ktora sprawdza czy dana baz juz istnieje, w przeciwnym razie tworzy ja
+        /// Metoda ktora sprawdza czy dana baz juz istnieje, w przeciwnym razie tworzy ją.
         /// </summary>
         public DatabasesContext()
         {
@@ -24,9 +24,9 @@ namespace SQLviewer
         }
 
         /// <summary>
-        /// metoda ktora zapisuje plik Databases.db pod dana sciezka
+        /// Metoda ktora zapisuje plik Databases.db pod dana sciezka.
         /// </summary>
-        /// <param name="optionbuilder"></param>
+        /// <param name="optionbuilder">Obiekt <see cref="DbContextOptionsBuilder"/> który towrzy połączenie z bazą.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionbuilder)
         {
             optionbuilder.UseSqlite(@"Data Source="+path+"\\Databases.db");
@@ -36,7 +36,7 @@ namespace SQLviewer
     }
 
     /// <summary>
-    /// klasa posiadajaca wlasciwosci ktore sa pozniej wstawiane do tablicy
+    /// Klasa posiadajaca wlasciwosci ktore sa pozniej wstawiane do tablicy.
     /// </summary>
     public class Database
     {
